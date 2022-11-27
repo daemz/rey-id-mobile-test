@@ -113,6 +113,7 @@ const Main = () => {
           <Pressable
             onPress={() => {
               navigation.navigate('Second', {shouldShowButton: false});
+              // navigation.navigate('ProductDetail', {id: '10'});
             }}
             style={styles.bottomButton}>
             <Text>Go to second screen</Text>

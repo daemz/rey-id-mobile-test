@@ -1,6 +1,6 @@
 import {IApiProductResponse} from '@appTypes/api.type';
 import {IProduct} from '@appTypes/product.type';
-import {PRODUCT_LIST} from '@constants/reactQuery.const';
+import {PRODUCT_DETAIL} from '@constants/reactQuery.const';
 import {APIClient} from '@utils/api';
 import {useQuery} from 'react-query';
 
@@ -10,11 +10,7 @@ interface IOptions {
 
 export const fetchProductById = async (id: string): Promise<IProduct> => {
   try {
-    const response: IApiProductResponse = await APIClient.get(
-      'products',
-      `/${id}`,
-    );
-    return response?.data;
+    return await APIClient.get('products', `${id}`);
   } catch (err: any) {
     console.error(
       'services/User/Queries/useFetchProductById',
@@ -31,7 +27,7 @@ const useFetchProductById = (
   options: IOptions = {enabled: true},
 ) => {
   return useQuery<IProduct, Error>(
-    PRODUCT_LIST,
+    PRODUCT_DETAIL,
     async () => {
       const response = await fetchProductById(id);
       if (!response) {

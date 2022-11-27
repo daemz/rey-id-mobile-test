@@ -1,4 +1,3 @@
-import {IApiProductListResponse} from '@appTypes/api.type';
 import {IProduct} from '@appTypes/product.type';
 import {PRODUCT_LIST} from '@constants/reactQuery.const';
 import {APIClient} from '@utils/api';
@@ -10,9 +9,9 @@ interface IOptions {
 
 export const fetchProductList = async (): Promise<Array<IProduct>> => {
   try {
-    const response: IApiProductListResponse = await APIClient.get('products');
+    // const response: IApiProductListResponse = await APIClient.get('products');
 
-    return response?.data;
+    return await APIClient.get('products');
   } catch (err: any) {
     console.error(
       'services/User/Queries/useFetchProductList',

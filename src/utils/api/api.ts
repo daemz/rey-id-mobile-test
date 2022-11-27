@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // modify the base url here
 // export const BASE_URL = 'https://api.com'
-export const BASE_URL = 'https://6382f0f71ada9475c8f5426e.mockapi.io/';
+export const BASE_URL = 'https://6382f0f71ada9475c8f5426e.mockapi.io';
 
 export const API = {
   async get(url: string, headers?: any): Promise<any> {
