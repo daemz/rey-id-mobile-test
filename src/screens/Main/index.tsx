@@ -24,11 +24,11 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {useFetchUser} from '@services/User';
 import {useSelector} from 'react-redux';
 import {RootState} from '@store/index';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
+import {useFetchProductList} from '@services/Product';
 
 const Section = ({children, title}: any) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -67,7 +67,7 @@ const Main = () => {
 
   const isDarkMode = useColorScheme() === 'dark';
 
-  const {refetch: refetchUserData} = useFetchUser({
+  const {refetch: refetchProductList} = useFetchProductList({
     enabled: false,
   });
 
@@ -75,9 +75,9 @@ const Main = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const fetchUserData = async (): Promise<any> => {
+  const fetchProductList = async (): Promise<any> => {
     try {
-      const {data} = await refetchUserData();
+      const {data} = await refetchProductList();
       console.info('data fetched nih coy: ', data);
 
       return data;
@@ -89,7 +89,7 @@ const Main = () => {
 
   React.useEffect(() => {
     (async () => {
-      await fetchUserData();
+      await fetchProductList();
     })();
   }, []);
 

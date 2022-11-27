@@ -1,3 +1,4 @@
+import {IApiUserResponse} from '@appTypes/api.type';
 import {IUser} from '@appTypes/user.type';
 import {USER_DATA} from '@constants/reactQuery.const';
 import {APIClient} from '@utils/api';
@@ -9,7 +10,8 @@ interface IOptions {
 
 export const fetchUser = async (): Promise<IUser> => {
   try {
-    return await APIClient.get('users', '/some-path');
+    const response: IApiUserResponse = await APIClient.get('users');
+    return response?.data;
   } catch (err: any) {
     console.error(
       'services/User/Queries/useFetchUser',

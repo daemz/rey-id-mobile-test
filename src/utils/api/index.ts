@@ -1,8 +1,5 @@
 import {getBuildNumber, getVersion} from 'react-native-device-info';
-import {API} from './api';
-
-// dummy base url
-const BASE_URL = 'https://api.com'; // set your base url here
+import {API, BASE_URL} from './api';
 
 export const APIClient = {
   async getToken(): Promise<string> {
@@ -28,7 +25,15 @@ export const APIClient = {
     try {
       console.info('GET', `${BASE_URL}/${resource}/${path}`);
       // const url = `${BASE_URL}/${resource}/${path}`; // some url here
-      const url = 'https://jsonplaceholder.typicode.com/posts'; // some url here
+      // const url = 'https://jsonplaceholder.typicode.com/posts'; // some url here
+      let url = ''; // some url here
+
+      if (path) {
+        url = `${resource}/${path}`;
+      } else {
+        url = resource;
+      }
+
       return await API.get(url, {
         headers: await this.getHeaders(),
       });
@@ -43,13 +48,19 @@ export const APIClient = {
 
   async post<Type>(
     resource: string,
-    path: string,
-    body: any,
+    path?: string,
+    body?: any,
     additionalHeaders?: any,
   ): Promise<Type> {
     try {
       console.info('POST', `${BASE_URL}/${resource}/${path}`);
-      const url = '';
+      let url = '';
+
+      if (path) {
+        url = `${resource}/${path}`;
+      } else {
+        url = resource;
+      }
 
       return await API.post(url, body, additionalHeaders);
     } catch (err: any) {
@@ -63,13 +74,19 @@ export const APIClient = {
 
   async patch<Type>(
     resource: string,
-    path: string,
-    body: any,
+    path?: string,
+    body?: any,
     additionalHeaders?: any,
   ): Promise<Type> {
     try {
       console.info('PATCH', `${BASE_URL}/${resource}/${path}`);
-      const url = '';
+      let url = '';
+
+      if (path) {
+        url = `${resource}/${path}`;
+      } else {
+        url = resource;
+      }
 
       return await API.patch(url, body, additionalHeaders);
     } catch (err: any) {
@@ -83,13 +100,19 @@ export const APIClient = {
 
   async put<Type>(
     resource: string,
-    path: string,
-    body: any,
+    path?: string,
+    body?: any,
     additionalHeaders?: any,
   ): Promise<Type> {
     try {
       console.info('PUT', `${BASE_URL}/${resource}/${path}`);
-      const url = '';
+      let url = '';
+
+      if (path) {
+        url = `${resource}/${path}`;
+      } else {
+        url = resource;
+      }
 
       return await API.put(url, body, additionalHeaders);
     } catch (err: any) {
