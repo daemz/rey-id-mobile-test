@@ -1,7 +1,5 @@
 import {StyleSheet, ViewStyle} from 'react-native';
 
-import * as appTheme from '@assets/custom-theme.json';
-
 interface IStyles {
   container: ViewStyle;
   headerLeftButton: ViewStyle;

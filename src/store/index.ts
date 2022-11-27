@@ -14,10 +14,12 @@ import {setupListeners} from '@reduxjs/toolkit/query';
 
 import UserReducer from './User';
 import AppReducer from './App';
+import ProductReducer from './Product';
 
 const reducers = combineReducers({
   user: UserReducer,
   app: AppReducer,
+  product: ProductReducer,
 });
 
 const persistConfig = {

@@ -12,3 +12,7 @@ export interface IProduct {
   image?: string;
   price?: string;
 }
+
+export interface IProductSliceRedux {
+  products: IProduct[];
+}

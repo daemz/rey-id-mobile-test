@@ -10,6 +10,9 @@ import {PersistGate} from 'redux-persist/lib/integration/react';
 import {persistor, store} from './store';
 import {NavigationContainer} from '@react-navigation/native';
 import {navigationRef} from '@utils/navigators';
+import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
+import * as eva from '@eva-design/eva';
+import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
 const App = (): React.ReactElement => {
   const queryClient = new QueryClient();
@@ -42,15 +45,18 @@ const App = (): React.ReactElement => {
         barStyle="dark-content"
         backgroundColor={appTheme['color-white']}
       />
+      <IconRegistry icons={EvaIconsPack} />
       <QueryClientProvider client={queryClient}>
         <StoreProvider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <InitializeApp>
-              <SafeAreaProvider>
-                <NavigationContainer ref={navigationRef}>
-                  <HomeNavigator />
-                </NavigationContainer>
-              </SafeAreaProvider>
+              <ApplicationProvider {...eva} theme={eva.light}>
+                <SafeAreaProvider>
+                  <NavigationContainer ref={navigationRef}>
+                    <HomeNavigator />
+                  </NavigationContainer>
+                </SafeAreaProvider>
+              </ApplicationProvider>
             </InitializeApp>
           </PersistGate>
         </StoreProvider>
