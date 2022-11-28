@@ -10,7 +10,12 @@ interface IOptions {
 
 export const fetchProductById = async (id: string): Promise<IProduct> => {
   try {
-    return await APIClient.get('products', `${id}`);
+    const response: IApiProductResponse = await APIClient.get(
+      'products',
+      `${id}`,
+    );
+
+    return response?.data;
   } catch (err: any) {
     console.error(
       'services/User/Queries/useFetchProductById',

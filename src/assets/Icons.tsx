@@ -19,3 +19,18 @@ export const CloseIcon = ({
     fill={fill || appTheme['color-primary-500']}
   />
 );
+
+export const SearchIcon = ({
+  width,
+  height,
+  fill,
+  style,
+}: IconProps | ImageProps): IconElement => (
+  <Icon
+    style={style}
+    width={width || 25}
+    height={height || 25}
+    name="search"
+    fill={fill || appTheme['color-brik-font-white']}
+  />
+);

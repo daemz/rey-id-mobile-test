@@ -2,6 +2,11 @@ import {StyleSheet} from 'react-native';
 import * as appTheme from '@assets/custom-theme.json';
 
 export const globalStyle = StyleSheet.create({
+  safeAreaContainer: {
+    flex: 1,
+    // alignItems: 'center',
+    backgroundColor: 'white',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -37,12 +42,17 @@ export const globalStyle = StyleSheet.create({
   },
   headerStyle: {
     // backgroundColor: appTheme['color-success-500'],
-    backgroundColor: appTheme['color-white'],
+    // backgroundColor: appTheme['color-white'],
+    backgroundColor: appTheme['color-brik-black'],
     elevation: 0,
     shadowOpacity: 0,
     borderBottomWidth: 0,
   },
-  headerTitleStyle: {fontFamily: 'Druk Text', textTransform: 'uppercase'},
+  headerTitleStyle: {
+    fontFamily: 'Druk Text',
+    textTransform: 'uppercase',
+    color: appTheme['color-brik-font-white'],
+  },
   avatarRightSpace: {marginRight: 16},
   toastStyle: {
     flex: 0,
@@ -102,5 +112,15 @@ export const globalStyle = StyleSheet.create({
   },
   headerLeftButton: {
     padding: 16,
+  },
+  brikLogo: {
+    backgroundColor: appTheme['color-brik-red'],
+    padding: 8,
+    marginLeft: 12,
+    borderRadius: 4,
+  },
+  brikLogoText: {
+    fontWeight: 'bold',
+    color: appTheme['color-brik-font-white'],
   },
 });
