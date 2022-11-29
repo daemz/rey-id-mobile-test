@@ -16,7 +16,7 @@ export const CloseIcon = ({
     width={width || 28}
     height={height || 28}
     name="close"
-    fill={fill || appTheme['color-primary-500']}
+    fill={fill || appTheme['color-brik-red']}
   />
 );
 
@@ -32,5 +32,35 @@ export const SearchIcon = ({
     height={height || 25}
     name="search"
     fill={fill || appTheme['color-brik-font-white']}
+  />
+);
+
+export const CloseIconFill = ({
+  width,
+  height,
+  fill,
+  style,
+}: IconProps | ImageProps): IconElement => (
+  <Icon
+    style={style}
+    width={width || 24}
+    height={height || 24}
+    name="close-circle"
+    fill={fill || appTheme['color-black-50']}
+  />
+);
+
+export const PlusIconFill = ({
+  width,
+  height,
+  fill,
+  style,
+}: IconProps | ImageProps): IconElement => (
+  <Icon
+    style={style}
+    width={width || 25}
+    height={height || 25}
+    name="plus-outline"
+    fill={fill || appTheme['color-black-50']}
   />
 );

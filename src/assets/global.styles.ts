@@ -123,4 +123,15 @@ export const globalStyle = StyleSheet.create({
     fontWeight: 'bold',
     color: appTheme['color-brik-font-white'],
   },
+  dividerLine: {
+    flex: 1,
+    alignContent: 'center',
+    alignSelf: 'center',
+    // width: '100%',
+    position: 'relative',
+    borderBottomColor: appTheme['color-black-20'],
+    borderBottomWidth: 1,
+    // paddingBottom: 30,
+    // marginBottom: 20,
+  },
 });
