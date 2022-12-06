@@ -1,32 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {Image as NativeImage, TouchableOpacity} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 
 import {globalStyle} from '@assets/global.styles';
 import {CloseIcon} from '@assets/Icons';
-import {BACK_BUTTON_TEXT} from '@constants/dummy.const';
+import {assets} from '@assets/assets';
 
 interface IHeader {
   title?: string | React.ReactElement;
   onPressLeft?: () => void;
   headerRight?: React.ReactElement;
-  variant?: 'back' | 'close';
+  variant?: 'logo' | 'close';
   deps?: React.DependencyList;
 }
 
 interface IHeaderLeft {
   onBack?: () => void;
-  variant?: 'back' | 'close';
+  variant?: 'logo' | 'close';
 }
 
 const HeaderLeft = ({onBack, variant}: IHeaderLeft) => {
-  if (variant === 'back') {
+  if (variant === 'logo') {
     return (
-      <TouchableOpacity style={globalStyle.headerLeftButton} onPress={onBack}>
-        <Text>{BACK_BUTTON_TEXT}</Text>
-      </TouchableOpacity>
+      <NativeImage
+        source={assets.logo.pokemon_logo}
+        style={globalStyle.pokemonLogo}
+      />
     );
   }
   return (
@@ -40,7 +41,7 @@ const useHeader = ({
   title,
   onPressLeft,
   headerRight,
-  variant = 'back',
+  variant = 'close',
   deps = [],
 }: IHeader) => {
   const navigation = useNavigation<any>();

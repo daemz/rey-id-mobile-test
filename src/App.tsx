@@ -13,6 +13,9 @@ import {navigationRef} from '@utils/navigators';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {Portal, Provider as PaperProvider} from 'react-native-paper';
+import './translations';
 
 const App = (): React.ReactElement => {
   const queryClient = new QueryClient();
@@ -47,19 +50,25 @@ const App = (): React.ReactElement => {
       />
       <IconRegistry icons={EvaIconsPack} />
       <QueryClientProvider client={queryClient}>
-        <StoreProvider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <InitializeApp>
-              <ApplicationProvider {...eva} theme={eva.light}>
-                <SafeAreaProvider>
-                  <NavigationContainer ref={navigationRef}>
-                    <HomeNavigator />
-                  </NavigationContainer>
-                </SafeAreaProvider>
-              </ApplicationProvider>
-            </InitializeApp>
-          </PersistGate>
-        </StoreProvider>
+        <Portal.Host>
+          <StoreProvider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              <PaperProvider>
+                <InitializeApp>
+                  <ApplicationProvider {...eva} theme={eva.light}>
+                    <SafeAreaProvider>
+                      <GestureHandlerRootView style={{flex: 1}}>
+                        <NavigationContainer ref={navigationRef}>
+                          <HomeNavigator />
+                        </NavigationContainer>
+                      </GestureHandlerRootView>
+                    </SafeAreaProvider>
+                  </ApplicationProvider>
+                </InitializeApp>
+              </PaperProvider>
+            </PersistGate>
+          </StoreProvider>
+        </Portal.Host>
       </QueryClientProvider>
     </>
   );

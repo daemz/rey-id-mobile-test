@@ -15,11 +15,13 @@ import {setupListeners} from '@reduxjs/toolkit/query';
 import UserReducer from './User';
 import AppReducer from './App';
 import ProductReducer from './Product';
+import PokemonReducer from './Pokemon';
 
 const reducers = combineReducers({
   user: UserReducer,
   app: AppReducer,
   product: ProductReducer,
+  pokemon: PokemonReducer,
 });
 
 const persistConfig = {

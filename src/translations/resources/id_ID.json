@@ -1,0 +1,17 @@
+{
+	"general.mainTitle": "Semua data Pokémon yang kamu butuhkan ada di satu tempat!",
+	"general.mainSubtitle": "Ribuan data berkumpul di satu tempat",
+	"general.mainButtonText": "Cek PokéDex",
+	"general.allGeneration": "Ada {{total}} Pokémon dari Seluruh Generasi ditotalkan",
+	"general.loadMore": "Muat Lagi...",
+	"general.weight": "Berat",
+	"general.height": "Tinggi",
+	"general.abilities": "Kemampuan",
+	"general.type": "Tipe",
+	"general.hidden": "Tersembunyi",
+	"general.moreDetail": "Detail Lebih",
+	"general.pokemonDetail": "Detil Pokémon",
+	"general.form": "Wujud",
+	"general.stat": "Status",
+	"general.pokemonType": "Tipe Pokémon"
+}

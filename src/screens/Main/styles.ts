@@ -1,4 +1,4 @@
-import {StyleSheet, ViewStyle} from 'react-native';
+import {ImageStyle, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 
 import * as appTheme from '@assets/custom-theme.json';
 
@@ -8,9 +8,20 @@ interface IStyles {
   sectionDescription: ViewStyle;
   highlight: ViewStyle;
   bottomButton: ViewStyle;
+  mainPokemonImage: ImageStyle;
+  mainAreaContainer: ViewStyle;
+  titleStyle: TextStyle;
+  subtitleStyle: TextStyle;
+  pokeButton: ViewStyle;
 }
 
 const styles = StyleSheet.create<IStyles>({
+  mainAreaContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'space-evenly',
+    paddingHorizontal: 20,
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
@@ -34,6 +45,22 @@ const styles = StyleSheet.create<IStyles>({
     margin: 16,
     backgroundColor: appTheme['color-azure'],
   },
+  mainPokemonImage: {
+    maxWidth: '100%',
+    maxHeight: '50%',
+    alignSelf: 'center',
+    resizeMode: 'contain',
+  },
+  titleStyle: {
+    fontWeight: 'bold',
+    color: appTheme['color-black-80'],
+    fontSize: 30,
+  },
+  subtitleStyle: {
+    color: appTheme['color-black-0'],
+    fontSize: 20,
+  },
+  pokeButton: {maxWidth: '70%'},
 });
 
 export default styles;

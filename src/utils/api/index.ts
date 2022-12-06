@@ -46,6 +46,22 @@ export const APIClient = {
     }
   },
 
+  async getWithFullUrl<Type>(url: string): Promise<Type> {
+    try {
+      console.info('GET', url);
+
+      return await API.getWithBaseUrl(url, {
+        headers: await this.getHeaders(),
+      });
+    } catch (err: any) {
+      if (err?.response) {
+        throw err?.response;
+      }
+
+      throw err;
+    }
+  },
+
   async post<Type>(
     resource: string,
     path?: string,

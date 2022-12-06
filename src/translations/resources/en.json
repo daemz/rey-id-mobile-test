@@ -1,0 +1,17 @@
+{
+	"general.mainTitle": "All the Pokémon data you'll ever need in one place!",
+	"general.mainSubtitle": "Thousands of data compiled into one place",
+	"general.mainButtonText": "Check PokéDex",
+	"general.allGeneration": "All Generation totalling {{total}} Pokémon",
+	"general.loadMore": "Load More...",
+	"general.weight": "Weight",
+	"general.height": "Height",
+	"general.abilities": "Abilities",
+	"general.type": "Type",
+	"general.hidden": "Hidden",
+	"general.moreDetail": "More Detail",
+	"general.pokemonDetail": "Pokémon Detail",
+	"general.form": "Form",
+	"general.stat": "Stat",
+	"general.pokemonType": "Pokémon Type"
+}

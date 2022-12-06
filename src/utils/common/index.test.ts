@@ -1,6 +1,7 @@
 import 'react-native';
 
 import {
+  capitalizeFirstLetter,
   concatenateSnakeCase,
   lowerCaseFirstChar,
   recursiveParse,
@@ -57,6 +58,10 @@ it('lowerCaseFirstChar works well', () => {
 });
 
 it('concatenateSnakeCase works well', () => {
-  expect(concatenateSnakeCase('cash_on_delivery')).toEqual('cashOnDelivery');
-  expect(concatenateSnakeCase('pickup_on_store')).toEqual('pickupOnStore');
+  expect(concatenateSnakeCase('pikachu_on_fire')).toEqual('pikachuOnFire');
+});
+
+it('capitalizeFirstLetter works well', () => {
+  expect(capitalizeFirstLetter('pokemon')).toEqual('Pokemon');
+  expect(capitalizeFirstLetter('evolution')).toEqual('Evolution');
 });

@@ -7,6 +7,12 @@ export const globalStyle = StyleSheet.create({
     // alignItems: 'center',
     backgroundColor: 'white',
   },
+  mainAreaContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'space-evenly',
+    paddingHorizontal: 20,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -42,8 +48,7 @@ export const globalStyle = StyleSheet.create({
   },
   headerStyle: {
     // backgroundColor: appTheme['color-success-500'],
-    // backgroundColor: appTheme['color-white'],
-    backgroundColor: appTheme['color-brik-black'],
+    backgroundColor: appTheme['color-white'],
     elevation: 0,
     shadowOpacity: 0,
     borderBottomWidth: 0,
@@ -51,7 +56,7 @@ export const globalStyle = StyleSheet.create({
   headerTitleStyle: {
     fontFamily: 'Druk Text',
     textTransform: 'uppercase',
-    color: appTheme['color-brik-font-white'],
+    color: appTheme['color-black-100'],
   },
   avatarRightSpace: {marginRight: 16},
   toastStyle: {
@@ -113,16 +118,6 @@ export const globalStyle = StyleSheet.create({
   headerLeftButton: {
     padding: 16,
   },
-  brikLogo: {
-    backgroundColor: appTheme['color-brik-red'],
-    padding: 8,
-    marginLeft: 12,
-    borderRadius: 4,
-  },
-  brikLogoText: {
-    fontWeight: 'bold',
-    color: appTheme['color-brik-font-white'],
-  },
   dividerLine: {
     flex: 1,
     alignContent: 'center',
@@ -133,5 +128,9 @@ export const globalStyle = StyleSheet.create({
     borderBottomWidth: 1,
     // paddingBottom: 30,
     // marginBottom: 20,
+  },
+  pokemonLogo: {marginLeft: 20, width: 80, height: 30},
+  menuLogoStyle: {
+    marginRight: 16,
   },
 });

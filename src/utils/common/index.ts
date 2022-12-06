@@ -13,7 +13,7 @@ export const replaceAllDuplicateLineBreaks = (sentence: string): string => {
   return sentence.replace(/\\n/g, '\n');
 };
 
-export const recursiveParse = (jsonObject: string) => {
+export const recursiveParse = (jsonObject: string): any => {
   try {
     if (jsonObject && typeof jsonObject === 'object') {
       return jsonObject;
@@ -26,6 +26,10 @@ export const recursiveParse = (jsonObject: string) => {
 
 export const lowerCaseFirstChar = (camelWords: string): string => {
   return camelWords?.charAt(0).toLowerCase() + camelWords?.slice(1);
+};
+
+export const capitalizeFirstLetter = (word: string): string => {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 };
 
 export const concatenateSnakeCase = (snakeCase: string): string => {

@@ -101,7 +101,7 @@
     "color-minimum-track": "#92DED7",
     "color-maximum-track": "#E6F2F1",
     "color-slider-text": "#064E47",
-    "color-brik-red": "#e52525",
-    "color-brik-black": "#010206",
-    "color-brik-font-white": "#faf6f4"
+    "color-pokemon-primary": "#e6ab09",
+    "color-pokemon-text-primary": "#e6ab08",
+    "color-pokemon-card-container": "#feffff"
   }

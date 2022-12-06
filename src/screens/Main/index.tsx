@@ -9,118 +9,149 @@
 
 import * as React from 'react';
 import {
+  Dimensions,
+  Image,
   Pressable,
   SafeAreaView,
-  ScrollView,
   StatusBar,
   Text,
   useColorScheme,
-  View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useSelector} from 'react-redux';
 import {RootState} from '@store/index';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
-import {useFetchProductList} from '@services/Product';
+import * as appTheme from '@assets/custom-theme.json';
+import {globalStyle} from '@assets/global.styles';
+import {useHeader} from '@hooks';
+import {BottomSheet, PokeButton, TopSheet} from '@components';
+import {MenuIcon} from '@assets/Icons';
+import {assets} from '@assets/assets';
+import DrawerComponent from '@navigators/components/DrawerComponent';
+import {useTranslation} from 'react-i18next';
+import {Modalize} from 'react-native-modalize';
+import {IPokemonRawData, ITypes} from '@appTypes/poke.type';
+import {EMenuName} from '@constants/drawerMenu.const';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
-const Section = ({children, title}: any) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+const HEIGHT_FOR_MODAL = Dimensions.get('screen').height / 1.2;
+
+interface ITextParams {
+  text: string;
+  variant?: 'title' | 'subtitle';
+}
 
 const Main = () => {
-  const {tokenData, userDetail} = useSelector(
-    (state: RootState) => state?.user,
-  );
+  const {t} = useTranslation();
+  const modalRef = React.useRef<Modalize>(null);
   const navigation = useNavigation<any>();
-
-  console.info('tokenData: ', tokenData);
-  console.info('userDetail: ', userDetail);
 
   const isDarkMode = useColorScheme() === 'dark';
 
-  const {refetch: refetchProductList} = useFetchProductList({
-    enabled: false,
-  });
+  const {isFetchingPokemonData} = useSelector(
+    (state: RootState) => state?.pokemon,
+  );
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: isDarkMode ? Colors.darker : appTheme['color-white'],
   };
 
-  const fetchProductList = async (): Promise<any> => {
-    try {
-      const {data} = await refetchProductList();
-      console.info('data fetched nih coy: ', data);
+  const [selectedMenu] = React.useState<EMenuName>(EMenuName?.HOME);
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+  // const [selectedPokemon, setSelectedPokemon] = React.useState<IPokemon>(null);
+  const [selectedPokemon] = React.useState<IPokemonRawData>(null);
 
-      return data;
-    } catch (err) {
-      console.error('error fetchUserData: ', err);
-      throw err;
+  const toggleModalVisible = React.useCallback(() => {
+    if (isVisible) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
     }
+  }, [isVisible]);
+
+  const handleOnPressMenu = (navigationName: string) => {
+    const dataToBePassed: ITypes = {
+      slot: 1,
+      type: {
+        name: 'normal',
+        url: 'https://pokeapi.co/api/v2/type/1/',
+      },
+    };
+
+    setIsVisible(false);
+    navigation.navigate(navigationName, {
+      pokemonType: dataToBePassed,
+    });
   };
+
+  const onSwipeUp = () => {
+    navigation.navigate('PokeDex');
+  };
+
+  useHeader({
+    variant: 'logo',
+    headerRight: (
+      <Pressable
+        onPress={() => {
+          toggleModalVisible();
+        }}
+        style={globalStyle.menuLogoStyle}>
+        <MenuIcon />
+      </Pressable>
+    ),
+    deps: [modalRef],
+  });
 
   React.useEffect(() => {
-    (async () => {
-      await fetchProductList();
-    })();
-  }, []);
+    navigation.setOptions({
+      gestureEnabled: true,
+      gestureDirection: 'vertical',
+    });
+  }, [navigation]);
+
+  const RenderTitleText = ({text, variant}: ITextParams) => (
+    <Text
+      style={variant === 'title' ? styles.titleStyle : styles.subtitleStyle}>
+      {text}
+    </Text>
+  );
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <LearnMoreLinks />
-          <Pressable
-            onPress={() => {
-              navigation.navigate('Second', {shouldShowButton: false});
-              // navigation.navigate('ProductDetail', {id: '10'});
-            }}
-            style={styles.bottomButton}>
-            <Text>Go to second screen</Text>
-          </Pressable>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <GestureRecognizer style={{flex: 1}} onSwipeUp={() => onSwipeUp()}>
+      <SafeAreaView style={[styles.mainAreaContainer, backgroundStyle]}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <Image
+          source={assets.image.pokemon_home_image}
+          style={styles.mainPokemonImage}
+        />
+        <RenderTitleText text={t('general.mainTitle')} variant="title" />
+        <RenderTitleText text={t('general.mainSubtitle')} variant="subtitle" />
+
+        <PokeButton
+          style={styles.pokeButton}
+          title={t('general.mainButtonText')}
+          onPress={() => navigation.navigate('PokeDex')}
+          isLoading={isFetchingPokemonData}
+        />
+
+        <TopSheet visible={isVisible} onClosePress={() => setIsVisible(false)}>
+          <DrawerComponent
+            selectedMenu={selectedMenu}
+            onMenuPress={(nav: string) => handleOnPressMenu(nav)}
+          />
+        </TopSheet>
+        <BottomSheet
+          sheetRef={modalRef}
+          title={selectedPokemon?.name}
+          height={HEIGHT_FOR_MODAL}>
+          <DrawerComponent
+            onMenuPress={(nav: string) => handleOnPressMenu(nav)}
+          />
+        </BottomSheet>
+      </SafeAreaView>
+    </GestureRecognizer>
   );
 };
 
